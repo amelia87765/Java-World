@@ -64,4 +64,11 @@ public class Organism {
         }
         return false;
     }
+
+    /*
+     * public Organism reproduce() {
+     * Organism o = new Organism();
+     * return o;
+     * }
+     */
 }
