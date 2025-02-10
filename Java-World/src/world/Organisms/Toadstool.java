@@ -15,4 +15,9 @@ public class Toadstool extends Plant {
         this.powerToReproduce = 4;
         this.sign = 'T';
     }
+
+    @Override
+    public Toadstool reproduce() {
+        return new Toadstool(new Position(this.position.getX(), (this.position.getY() + 1) % 10));
+    }
 }

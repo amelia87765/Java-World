@@ -2,13 +2,13 @@ package world.Organisms;
 
 import world.Position;
 
-public class Organism {
-    int power;
-    int initiative;
-    Position position;
-    int lifeLength;
-    int powerToReproduce;
-    char sign;
+public abstract class Organism {
+    protected int power;
+    protected int initiative;
+    protected Position position;
+    protected int lifeLength;
+    protected int powerToReproduce;
+    protected char sign;
 
     public void setPower(int pow) {
         this.power = pow;
@@ -59,16 +59,29 @@ public class Organism {
     }
 
     public boolean canReproduce() {
-        if (this.power >= this.powerToReproduce) {
-            return true;
-        }
-        return false;
+        return this.power >= this.powerToReproduce;
     }
 
-    /*
-     * public Organism reproduce() {
-     * Organism o = new Organism();
-     * return o;
-     * }
-     */
+    public boolean canMove() {
+        return this.initiative > 0;
+    }
+
+    public abstract Organism reproduce();
+
+    public void move(int direction) {
+        switch (direction) {
+            case 0 -> position.setX((position.getX() + 1) % 10);
+            case 1 -> position.setX((position.getX() - 1 + 10) % 10);
+            case 2 -> position.setY((position.getY() + 1) % 10);
+            case 3 -> position.setY((position.getY() - 1 + 10) % 10);
+            case 4 -> {
+                position.setX((position.getX() - 1 + 10) % 10);
+                position.setY((position.getY() - 1 + 10) % 10);
+            }
+            case 5 -> {
+                position.setX((position.getX() + 1) % 10);
+                position.setY((position.getY() + 1) % 10);
+            }
+        }
+    }
 }

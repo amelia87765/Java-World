@@ -14,4 +14,9 @@ public class Grass extends Plant {
         this.powerToReproduce = 3;
         this.sign = 'G';
     }
+
+    @Override
+    public Grass reproduce() {
+        return new Grass(new Position(this.position.getX(), (this.position.getY() + 1) % 10));
+    }
 }

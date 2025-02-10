@@ -2,12 +2,12 @@ package world.Organisms;
 
 import world.Position;
 
-public class Animal extends Organism {
-
-    Position lastPosition;
+public abstract class Animal extends Organism {
+    private Position lastPosition;
 
     public Animal(Position pos) {
         this.position = pos;
+        this.lastPosition = pos;
     }
 
     public void setLastPosition(Position lastP) {
@@ -17,4 +17,7 @@ public class Animal extends Organism {
     public Position getLastPosition() {
         return this.lastPosition;
     }
+
+    @Override
+    public abstract Animal reproduce();
 }

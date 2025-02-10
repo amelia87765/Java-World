@@ -1,10 +1,9 @@
 package world;
 
-import world.Organisms.*;
-
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import world.Organisms.Organism;
 
 public class Action {
 
@@ -12,42 +11,45 @@ public class Action {
         for (Organism o : organisms) {
             if (o.canReproduce()) {
                 Organism offspring = o.reproduce();
-                organisms.add(offspring);
-            }
-        }
-    }
-
-    public void makeMove(List<Organism> organisms) {
-        Random number = new Random();
-        int random;
-    }
-
-    public void remove(List<Organism> organisms) {
-        int size = organisms.size();
-        for (int i = 0; i < size; i++) {
-            Organism o1 = organisms.get(i);
-            for (int j = i + 1; j < size; j++) {
-                Organism o2 = organisms.get(j);
-                if (samePosition(o1, o2)) {
-                    if (o1.getPower() > o2.getPower()) {
-                        organisms.remove(o2);
-                    } else {
-                        organisms.remove(o1);
-                    }
+                if (offspring != null) {
+                    organisms.add(offspring);
+                    o.setPowerToReproduce(o.getPowerToReproduce() / 2);
                 }
             }
         }
     }
 
-    public boolean samePosition(Organism o1, Organism o2) {
-        if ((o1.getPosition().x == o2.getPosition().x) && (o1.getPosition().y == o2.getPosition().y))
-            return true;
-        return false;
+    public void makeMove(List<Organism> organisms) {
+        Random random = new Random();
+        for (Organism o : organisms) {
+            if (o.canMove()) {
+                o.move(random.nextInt(6));
+            }
+        }
+    }
+
+    public void remove(List<Organism> organisms) {
+        Iterator<Organism> iterator = organisms.iterator();
+        while (iterator.hasNext()) {
+            Organism o1 = iterator.next();
+            for (Organism o2 : organisms) {
+                if (!o1.equals(o2) && samePosition(o1, o2)) {
+                    if (o1.getPower() > o2.getPower()) {
+                        iterator.remove();
+                    } else {
+                        organisms.remove(o2);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     public void increasePower(List<Organism> organisms) {
-        for (Organism o : organisms) {
-            o.setPower(o.getPower() + 1);
-        }
+        organisms.forEach(o -> o.setPower(o.getPower() + 1));
+    }
+
+    private boolean samePosition(Organism o1, Organism o2) {
+        return o1.getPosition().equals(o2.getPosition());
     }
 }

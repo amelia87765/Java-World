@@ -17,4 +17,8 @@ public class Sheep extends Animal {
         this.sign = 'S';
     }
 
+    @Override
+    public Sheep reproduce() {
+        return new Sheep(new Position(this.position.getX(), (this.position.getY() + 1) % 10));
+    }
 }

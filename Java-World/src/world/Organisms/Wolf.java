@@ -15,4 +15,9 @@ public class Wolf extends Animal {
         this.powerToReproduce = 16;
         this.sign = 'W';
     }
+
+    @Override
+    public Wolf reproduce() {
+        return new Wolf(new Position(this.position.getX(), (this.position.getY() + 1) % 10));
+    }
 }

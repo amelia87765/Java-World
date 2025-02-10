@@ -15,4 +15,9 @@ public class Dandelion extends Plant {
         this.powerToReproduce = 2;
         this.sign = 'D';
     }
+
+    @Override
+    public Dandelion reproduce() {
+        return new Dandelion(new Position(this.position.getX(), (this.position.getY() + 1) % 10));
+    }
 }
