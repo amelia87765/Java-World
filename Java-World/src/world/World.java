@@ -6,17 +6,17 @@ import world.Organisms.Organism;
 
 public class World {
 
-    int worldX;
-    int worldY;
-    int turn = 0;
-    List<Organism> organisms;
+    private int worldX;
+    private int worldY;
+    private int turn = 0;
+    private List<Organism> organisms;
+    private char[][] fields;
 
     public World(int wX, int wY) {
         this.worldX = wX;
         this.worldY = wY;
+        this.fields = new char[this.worldX][this.worldY];
     }
-
-    char[][] fields = new char[this.worldX][this.worldY];
 
     public void setWorldX(int x) {
         this.worldX = x;
@@ -39,6 +39,19 @@ public class World {
     }
 
     public void makeTurn() {
+        if (organisms == null) {
+            return;
+        }
 
+        SortByPower.sort(organisms);
+        Action action = new Action();
+        action.add(organisms);
+        action.makeMove(organisms);
+        action.remove(organisms);
+        action.increasePower(organisms);
+        this.turn++;
+        for (Organism o : organisms) {
+            o.setPower(o.getPower() - 1);
+        }
     }
 }
