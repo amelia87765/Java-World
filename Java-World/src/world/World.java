@@ -1,5 +1,6 @@
 package world;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import world.Organisms.Organism;
@@ -16,6 +17,7 @@ public class World {
         this.worldX = wX;
         this.worldY = wY;
         this.fields = new char[this.worldX][this.worldY];
+        this.organisms = new ArrayList<>();
     }
 
     public void setWorldX(int x) {
@@ -34,6 +36,10 @@ public class World {
         return this.worldY;
     }
 
+    public void addOrganism(Organism o) {
+        organisms.add(o);
+    }
+
     public int getTurn() {
         return this.turn;
     }
@@ -50,8 +56,31 @@ public class World {
         action.remove(organisms);
         action.increasePower(organisms);
         this.turn++;
+
         for (Organism o : organisms) {
             o.setPower(o.getPower() - 1);
+        }
+
+        displayWorld();
+    }
+
+    public void displayWorld() {
+        for (int i = 0; i < this.worldX; i++) {
+            for (int j = 0; j < this.worldY; j++) {
+                this.fields[i][j] = '.';
+            }
+        }
+
+        for (Organism o : organisms) {
+            this.fields[o.getPosition().getX()][o.getPosition().getY()] = o.getSign();
+        }
+
+        System.out.println("Turn: " + this.turn);
+        for (int i = 0; i < this.worldX; i++) {
+            for (int j = 0; j < this.worldY; j++) {
+                System.out.print(this.fields[i][j]);
+            }
+            System.out.println();
         }
     }
 }
