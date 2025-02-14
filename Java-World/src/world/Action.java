@@ -30,8 +30,13 @@ public class Action {
 
     public void remove(List<Organism> organisms) {
         Iterator<Organism> iterator = organisms.iterator();
+
         while (iterator.hasNext()) {
             Organism o1 = iterator.next();
+            if (o1.getLifeLength() <= 0) {
+                iterator.remove();
+                continue;
+            }
             for (Organism o2 : organisms) {
                 if (!o1.equals(o2) && samePosition(o1, o2)) {
                     if (o1.getPower() > o2.getPower()) {

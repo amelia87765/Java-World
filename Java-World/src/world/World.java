@@ -59,6 +59,7 @@ public class World {
 
         for (Organism o : organisms) {
             o.setPower(o.getPower() - 1);
+            o.setLifeLength(o.getLifeLength() - 1);
         }
 
         displayWorld();
