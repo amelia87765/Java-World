@@ -6,6 +6,7 @@ public class Wolf extends Animal {
 
     public Wolf(Position pos) {
         super(pos);
+        defineParameters();
     }
 
     public void defineParameters() {

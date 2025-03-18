@@ -58,17 +58,20 @@ public class World {
         this.turn++;
 
         for (Organism o : organisms) {
-            o.setPower(o.getPower() - 1);
             o.setLifeLength(o.getLifeLength() - 1);
         }
 
+        System.out.println("Turn: " + turn + ", Organism count: " + organisms.size());
+        for (Organism o : organisms) {
+            System.out.println(o.getClass().getSimpleName() + " at " + o.getPosition() + " with power " + o.getPower());
+        }
         displayWorld();
     }
 
     public void displayWorld() {
         for (int i = 0; i < this.worldX; i++) {
             for (int j = 0; j < this.worldY; j++) {
-                this.fields[i][j] = '.';
+                this.fields[i][j] = '-';
             }
         }
 

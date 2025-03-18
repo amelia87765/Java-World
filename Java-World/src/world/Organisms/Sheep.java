@@ -6,7 +6,7 @@ public class Sheep extends Animal {
 
     public Sheep(Position pos) {
         super(pos);
-
+        defineParameters();
     }
 
     public void defineParameters() {

@@ -10,52 +10,56 @@ public abstract class Organism {
     protected int powerToReproduce;
     protected char sign;
 
-    public void setPower(int pow) {
-        this.power = pow;
+    public Organism(Position position) {
+        this.position = position;
     }
 
     public int getPower() {
         return this.power;
     }
 
-    public void setInitiative(int init) {
-        this.initiative = init;
+    public void setPower(int power) {
+        this.power = power;
     }
 
     public int getInitiative() {
         return this.initiative;
     }
 
-    public void setPosition(Position pos) {
-        this.position = pos;
+    public void setInitiative(int initiative) {
+        this.initiative = initiative;
     }
 
     public Position getPosition() {
         return this.position;
     }
 
-    public void setLifeLength(int lif) {
-        this.lifeLength = lif;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public int getLifeLength() {
         return this.lifeLength;
     }
 
-    public void setPowerToReproduce(int powR) {
-        this.powerToReproduce = powR;
+    public void setLifeLength(int lifeLength) {
+        this.lifeLength = lifeLength;
     }
 
     public int getPowerToReproduce() {
         return this.powerToReproduce;
     }
 
-    public void setSign(char sig) {
-        this.sign = sig;
+    public void setPowerToReproduce(int powerToReproduce) {
+        this.powerToReproduce = powerToReproduce;
     }
 
     public char getSign() {
         return this.sign;
+    }
+
+    public void setSign(char sign) {
+        this.sign = sign;
     }
 
     public boolean canReproduce() {

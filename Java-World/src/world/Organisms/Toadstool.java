@@ -6,6 +6,7 @@ public class Toadstool extends Plant {
 
     public Toadstool(Position pos) {
         super(pos);
+        defineParameters();
     }
 
     public void defineParameters() {

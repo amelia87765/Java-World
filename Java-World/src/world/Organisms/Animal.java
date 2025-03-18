@@ -5,13 +5,12 @@ import world.Position;
 public abstract class Animal extends Organism {
     private Position lastPosition;
 
-    public Animal(Position pos) {
-        this.position = pos;
-        this.lastPosition = pos;
+    public Animal(Position position) {
+        super(position);
     }
 
-    public void setLastPosition(Position lastP) {
-        this.lastPosition = lastP;
+    public void setLastPosition(Position lastPosition) {
+        this.lastPosition = lastPosition;
     }
 
     public Position getLastPosition() {

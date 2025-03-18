@@ -1,5 +1,6 @@
 package world;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -8,15 +9,17 @@ import world.Organisms.Organism;
 public class Action {
 
     public void add(List<Organism> organisms) {
+        List<Organism> newOrganisms = new ArrayList<>();
         for (Organism o : organisms) {
             if (o.canReproduce()) {
                 Organism offspring = o.reproduce();
                 if (offspring != null) {
-                    organisms.add(offspring);
+                    newOrganisms.add(offspring);
                     o.setPowerToReproduce(o.getPowerToReproduce() / 2);
                 }
             }
         }
+        organisms.addAll(newOrganisms);
     }
 
     public void makeMove(List<Organism> organisms) {
@@ -30,24 +33,29 @@ public class Action {
 
     public void remove(List<Organism> organisms) {
         Iterator<Organism> iterator = organisms.iterator();
+        List<Organism> toRemove = new ArrayList<>();
 
         while (iterator.hasNext()) {
             Organism o1 = iterator.next();
             if (o1.getLifeLength() <= 0) {
-                iterator.remove();
+                System.out.println("Removing " + o1.getClass().getSimpleName() + " (age expired)");
+                iterator.remove(); // Safe removal
                 continue;
             }
             for (Organism o2 : organisms) {
                 if (!o1.equals(o2) && samePosition(o1, o2)) {
                     if (o1.getPower() > o2.getPower()) {
-                        iterator.remove();
+                        System.out.println("Removing " + o2.getClass().getSimpleName() + " (weaker in battle)");
+                        toRemove.add(o2);
                     } else {
-                        organisms.remove(o2);
+                        System.out.println("Removing " + o1.getClass().getSimpleName() + " (weaker in battle)");
+                        iterator.remove();
                     }
                     break;
                 }
             }
         }
+        organisms.removeAll(toRemove);
     }
 
     public void increasePower(List<Organism> organisms) {

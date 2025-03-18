@@ -6,6 +6,7 @@ public class Dandelion extends Plant {
 
     public Dandelion(Position pos) {
         super(pos);
+        defineParameters();
     }
 
     public void defineParameters() {

@@ -5,6 +5,7 @@ import world.Position;
 public class Grass extends Plant {
     public Grass(Position pos) {
         super(pos);
+        defineParameters();
     }
 
     public void defineParameters() {
